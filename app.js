@@ -84,6 +84,34 @@ class linkedList {
     string += "null";
     return string;
   }
+  insertAt(value, index) {
+    if (!(value instanceof node)) value = new node(value);
+    let current = this.head;
+    let prev = null;
+    for (let i = 0; i < index; i++) {
+      if (prev == null) return "index larger than size";
+      prev = current;
+      current = current.next;
+    }
+    if (current == this.head) this.head = value;
+    else prev.next = value;
+    value.next = current;
+    return this;
+  }
+  removeAt(index) {
+    let current = this.head;
+    let prev = null;
+    for (let i = 0; i < index; i++) {
+      if (current == null) return "index larger than size";
+      prev = current;
+      current = current.next;
+    }
+    if (current == this.head) this.head = this.head.next;
+    else prev.next = current.next;
+
+    if (current == this.tail) this.tail = prev;
+    return this;
+  }
 }
 class node {
   constructor(value = null, next = null) {
@@ -107,6 +135,10 @@ console.log(l.find(2));
 console.log(l.at(2));
 console.log(l.size());
 console.log(l.pop());
+console.log(l.insertAt(31313, 2));
+console.log(l.toString());
+
+console.log(l.removeAt(3));
 console.log(l.toString());
 
 console.log(l.getHead());
